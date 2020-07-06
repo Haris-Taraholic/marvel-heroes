@@ -13,12 +13,12 @@ export const Hero = ({ id, description, name, avatar }) => {
       <Col lg={2}>
         <Avatar url={avatar} />
       </Col>
-      <Col lg={6}>
+      <Col lg={7}>
         <HeroData name={name} description={description} />
       </Col>
-      <Col lg={2} className="offset-2">
+      <Col lg={1.5} className="offset-2">
         <Link to={`/hero/${id}`} className={style.showInfo}>
-          More
+          Show Info
         </Link>
       </Col>
     </Row>
