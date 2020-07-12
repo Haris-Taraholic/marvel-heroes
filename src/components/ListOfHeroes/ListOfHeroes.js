@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 
-// import style from "./ListOfHeroes.module.scss";
-
 import { fetchAll } from "../../services/heroService";
+import Loader from "react-loader-spinner";
+import { Row } from "react-bootstrap";
 
 import { Hero } from "../Hero/Hero";
 
 class ListOfHeroes extends Component {
   constructor(props) {
     super(props);
-    this.state = { heroes: null };
+    this.state = { heroes: null, isLoading: true };
   }
   componentDidMount() {
+    if (this.state.heroes === null) {
+      this.setState({ isLoading: false });
+    } else {
+      this.setState({ isLoading: true });
+    }
     fetchAll().then((heroesData) =>
       this.setState({ heroes: heroesData.data.data.results })
     );
@@ -29,7 +34,11 @@ class ListOfHeroes extends Component {
           />
         ))}
       </div>
-    ) : null;
+    ) : (
+      <Row className="d-flex justify-content-center mt-4 pb-5">
+        <Loader type="Puff" color="#00BFFF" height={500} width={500} />
+      </Row>
+    );
   }
 }
 
